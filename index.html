@@ -4,60 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VisitMe Travel - Ariza</title>
+  <title>VisitMe Travel</title>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #0a1f44;
+      background: linear-gradient(135deg, #1c1f4c, #2c3e50);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 0;
-      padding: 15px;
     }
 
     .container {
       background: white;
-      padding: 25px 20px;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-      width: 100%;
-      max-width: 380px;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 400px;
     }
 
     h1 {
       text-align: center;
-      color: #0a1f44;
-      font-size: 22px;
-      margin-bottom: 10px;
+      color: #1c1f4c;
+      margin-bottom: 5px;
     }
 
     h2 {
       text-align: center;
-      color: #0a1f44;
-      margin: 10px 0 20px 0;
-      font-size: 18px;
-    }
-
-    .lang-select {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 10px;
-    }
-
-    select {
-      background-color: #0a1f44;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    select:hover {
-      background-color: #132f6a;
+      color: #333;
+      margin-top: 0;
     }
 
     .form-group {
@@ -66,24 +43,21 @@
 
     label {
       font-weight: bold;
-      color: #0a1f44;
-      font-size: 14px;
-      display: block;
-      margin-bottom: 5px;
+      color: #333;
     }
 
     input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 14px;
+      margin-top: 5px;
       box-sizing: border-box;
     }
 
     button {
       width: 100%;
-      background-color: #0a1f44;
+      background: #1c1f4c;
       color: white;
       padding: 12px;
       border: none;
@@ -94,12 +68,25 @@
     }
 
     button:hover {
-      background-color: #132f6a;
+      background: #0f1440;
+    }
+
+    .lang-select {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .lang-select select {
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
 
     .message {
       text-align: center;
-      margin-top: 14px;
+      margin-top: 15px;
       font-weight: bold;
     }
   </style>
@@ -107,6 +94,8 @@
 
 <body>
   <div class="container">
+    <h1>🌍 VisitMe Travel</h1>
+
     <div class="lang-select">
       <select id="lang" onchange="changeLang()">
         <option value="uz">🇺🇿 O‘zbekcha</option>
@@ -114,7 +103,6 @@
       </select>
     </div>
 
-    <h1>🌍 VisitMe Travel</h1>
     <h2 id="formTitle">Sayohat uchun ariza</h2>
 
     <div class="form-group">
@@ -137,7 +125,7 @@
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbx7WnNtUYd6zYzp6xBjpvngMfxapPrOkwC1kEeRbFGyeSEfSBPyOJ3_YIZzE2aW49VTyw/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx7WnNtUYd6zYzp6xBjpvngMfxapPrOkwC1kEeRbFGyeSEfSBPyOJ3_YIZzE2aW49VTyw/exec"; // shu yerga o‘zingnikini qo‘y
 
     const translations = {
       uz: {
@@ -178,30 +166,23 @@
 
       if (!name || !phone || !people) {
         message.style.color = "red";
-        message.textContent = lang === "uz"
-          ? "Iltimos, barcha maydonlarni to‘ldiring!"
-          : "Пожалуйста, заполните все поля!";
+        message.textContent = lang === "uz" ? "Iltimos, barcha maydonlarni to‘ldiring!" : "Пожалуйста, заполните все поля!";
         return;
       }
-
-      const timestamp = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
 
       try {
         const res = await fetch(scriptURL, {
           method: "POST",
-          body: JSON.stringify({ name, phone, people, timestamp }),
+          mode: "no-cors",
+          body: JSON.stringify({ name, phone, people }),
           headers: { "Content-Type": "application/json" },
         });
 
-        if (res.ok) {
-          message.style.color = "green";
-          message.textContent = translations[lang].success;
-          document.getElementById("name").value = "";
-          document.getElementById("phone").value = "";
-          document.getElementById("people").value = "";
-        } else {
-          throw new Error("Request failed");
-        }
+        message.style.color = "green";
+        message.textContent = translations[lang].success;
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("people").value = "";
       } catch (e) {
         message.style.color = "red";
         message.textContent = translations[lang].error;
@@ -209,5 +190,4 @@
     }
   </script>
 </body>
-
 </html>
