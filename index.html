@@ -2,190 +2,212 @@
 <html lang="uz">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VisitMe Travel - Ariza</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0a1f44;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisitMe Travel - Ariza</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0a1f44;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 15px;
+    }
 
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 350px;
-        }
+    .container {
+      background: white;
+      padding: 25px 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 380px;
+    }
 
-        h1 {
-            text-align: center;
-            color: #0a1f44;
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
+    h1 {
+      text-align: center;
+      color: #0a1f44;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
 
-        h2 {
-            text-align: center;
-            color: #0a1f44;
-            margin-top: 5px;
-        }
+    h2 {
+      text-align: center;
+      color: #0a1f44;
+      margin: 10px 0 20px 0;
+      font-size: 18px;
+    }
 
-        .form-group {
-            margin-bottom: 12px;
-        }
+    .lang-select {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
 
-        label {
-            font-weight: bold;
-            color: #0a1f44;
-            font-size: 14px;
-        }
+    select {
+      background-color: #0a1f44;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-        input {
-            width: 100%;
-            padding: 9px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 4px;
-        }
+    select:hover {
+      background-color: #132f6a;
+    }
 
-        button {
-            width: 100%;
-            background-color: #0a1f44;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-        button:hover {
-            background-color: #132f6a;
-        }
+    label {
+      font-weight: bold;
+      color: #0a1f44;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        .lang-select {
-            margin-bottom: 18px;
-        }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
 
-        .message {
-            text-align: center;
-            margin-top: 14px;
-            font-weight: bold;
-        }
-    </style>
+    button {
+      width: 100%;
+      background-color: #0a1f44;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #132f6a;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>🌍 VisitMe Travel</h1>
-        <div class="lang-select">
-            <select id="lang" onchange="changeLang()">
-                <option value="uz">🇺🇿 O‘zbekcha</option>
-                <option value="ru">🇷🇺 Русский</option>
-            </select>
-        </div>
-
-        <h2 id="formTitle">Sayohat uchun ariza</h2>
-
-        <div class="form-group">
-            <label id="nameLabel">Ismingiz</label>
-            <input type="text" id="name" required />
-        </div>
-
-        <div class="form-group">
-            <label id="phoneLabel">Telefon raqamingiz</label>
-            <input type="tel" id="phone" required />
-        </div>
-
-        <div class="form-group">
-            <label id="peopleLabel">Necha kishi sayohatga ketadi?</label>
-            <input type="number" id="people" required min="1" />
-        </div>
-
-        <button onclick="submitForm()">Yuborish</button>
-
-        <div class="message" id="message"></div>
+  <div class="container">
+    <div class="lang-select">
+      <select id="lang" onchange="changeLang()">
+        <option value="uz">🇺🇿 O‘zbekcha</option>
+        <option value="ru">🇷🇺 Русский</option>
+      </select>
     </div>
 
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbx7WnNtUYd6zYzp6xBjpvngMfxapPrOkwC1kEeRbFGyeSEfSBPyOJ3_YIZzE2aW49VTyw/exec";
+    <h1>🌍 VisitMe Travel</h1>
+    <h2 id="formTitle">Sayohat uchun ariza</h2>
 
-        const translations = {
-            uz: {
-                formTitle: "Sayohat uchun ariza",
-                nameLabel: "Ismingiz",
-                phoneLabel: "Telefon raqamingiz",
-                peopleLabel: "Necha kishi sayohatga ketadi?",
-                button: "Yuborish",
-                success: "Rahmat! Ma’lumot yuborildi ✅",
-                error: "Xatolik yuz berdi ❌"
-            },
-            ru: {
-                formTitle: "Заявка на путешествие",
-                nameLabel: "Ваше имя",
-                phoneLabel: "Ваш номер телефона",
-                peopleLabel: "Сколько человек едет?",
-                button: "Отправить",
-                success: "Спасибо! Данные отправлены ✅",
-                error: "Ошибка при отправке ❌"
-            }
-        };
+    <div class="form-group">
+      <label id="nameLabel">Ismingiz</label>
+      <input type="text" id="name" required />
+    </div>
 
-        function changeLang() {
-            const lang = document.getElementById("lang").value;
-            document.getElementById("formTitle").textContent = translations[lang].formTitle;
-            document.getElementById("nameLabel").textContent = translations[lang].nameLabel;
-            document.getElementById("phoneLabel").textContent = translations[lang].phoneLabel;
-            document.getElementById("peopleLabel").textContent = translations[lang].peopleLabel;
-            document.querySelector("button").textContent = translations[lang].button;
+    <div class="form-group">
+      <label id="phoneLabel">Telefon raqamingiz</label>
+      <input type="tel" id="phone" required />
+    </div>
+
+    <div class="form-group">
+      <label id="peopleLabel">Necha kishi sayohatga ketadi?</label>
+      <input type="number" id="people" required min="1" />
+    </div>
+
+    <button onclick="submitForm()">Yuborish</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx7WnNtUYd6zYzp6xBjpvngMfxapPrOkwC1kEeRbFGyeSEfSBPyOJ3_YIZzE2aW49VTyw/exec";
+
+    const translations = {
+      uz: {
+        formTitle: "Sayohat uchun ariza",
+        nameLabel: "Ismingiz",
+        phoneLabel: "Telefon raqamingiz",
+        peopleLabel: "Necha kishi sayohatga ketadi?",
+        button: "Yuborish",
+        success: "Rahmat! Ma’lumot yuborildi ✅",
+        error: "Xatolik yuz berdi ❌"
+      },
+      ru: {
+        formTitle: "Заявка на путешествие",
+        nameLabel: "Ваше имя",
+        phoneLabel: "Ваш номер телефона",
+        peopleLabel: "Сколько человек едет?",
+        button: "Отправить",
+        success: "Спасибо! Данные отправлены ✅",
+        error: "Ошибка при отправке ❌"
+      }
+    };
+
+    function changeLang() {
+      const lang = document.getElementById("lang").value;
+      document.getElementById("formTitle").textContent = translations[lang].formTitle;
+      document.getElementById("nameLabel").textContent = translations[lang].nameLabel;
+      document.getElementById("phoneLabel").textContent = translations[lang].phoneLabel;
+      document.getElementById("peopleLabel").textContent = translations[lang].peopleLabel;
+      document.querySelector("button").textContent = translations[lang].button;
+    }
+
+    async function submitForm() {
+      const lang = document.getElementById("lang").value;
+      const message = document.getElementById("message");
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const people = document.getElementById("people").value.trim();
+
+      if (!name || !phone || !people) {
+        message.style.color = "red";
+        message.textContent = lang === "uz"
+          ? "Iltimos, barcha maydonlarni to‘ldiring!"
+          : "Пожалуйста, заполните все поля!";
+        return;
+      }
+
+      const timestamp = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
+
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          body: JSON.stringify({ name, phone, people, timestamp }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (res.ok) {
+          message.style.color = "green";
+          message.textContent = translations[lang].success;
+          document.getElementById("name").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("people").value = "";
+        } else {
+          throw new Error("Request failed");
         }
-
-        async function submitForm() {
-            const lang = document.getElementById("lang").value;
-            const message = document.getElementById("message");
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const people = document.getElementById("people").value.trim();
-
-            if (!name || !phone || !people) {
-                message.style.color = "red";
-                message.textContent = lang === "uz" ? "Iltimos, barcha maydonlarni to‘ldiring!" : "Пожалуйста, заполните все поля!";
-                return;
-            }
-
-            const timestamp = new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' });
-
-            try {
-                const res = await fetch(scriptURL, {
-                    method: "POST",
-                    body: JSON.stringify({ name, phone, people, timestamp }),
-                    headers: { "Content-Type": "application/json" },
-                });
-
-                if (res.ok) {
-                    message.style.color = "green";
-                    message.textContent = translations[lang].success;
-                    document.getElementById("name").value = "";
-                    document.getElementById("phone").value = "";
-                    document.getElementById("people").value = "";
-                } else {
-                    throw new Error("Request failed");
-                }
-            } catch (e) {
-                message.style.color = "red";
-                message.textContent = translations[lang].error;
-            }
-        }
-    </script>
+      } catch (e) {
+        message.style.color = "red";
+        message.textContent = translations[lang].error;
+      }
+    }
+  </script>
 </body>
 
 </html>
