@@ -1,180 +1,181 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sayohat Formasi</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff7eb3, #8e44ad);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sayohat Formasi</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0a192f; /* toq ko‘k fon */
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
 
-        .container {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 400px;
-        }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 85%;
+      max-width: 320px; /* kichikroq forma */
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-        }
+    h2 {
+      text-align: center;
+      color: #0a192f;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .form-group {
+      margin-bottom: 12px;
+    }
 
-        label {
-            font-weight: bold;
-            color: #333;
-        }
+    label {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
 
-        input,
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 5px;
-        }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
 
-        button {
-            width: 100%;
-            background: linear-gradient(90deg, #8e44ad, #ff7eb3);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    button {
+      width: 100%;
+      background: #0a192f; /* toq ko‘k tugma */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        button:hover {
-            opacity: 0.9;
-        }
+    button:hover {
+      background-color: #112d5e;
+    }
 
-        .lang-select {
-            margin-bottom: 20px;
-        }
+    .lang-select {
+      margin-bottom: 15px;
+    }
 
-        .message {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-    </style>
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="lang-select">
-            <select id="lang" onchange="changeLang()">
-                <option value="uz">🇺🇿 O‘zbekcha</option>
-                <option value="ru">🇷🇺 Русский</option>
-            </select>
-        </div>
-
-        <h2 id="formTitle">Sayohat uchun ariza</h2>
-
-        <div class="form-group">
-            <label id="nameLabel">Ismingiz</label>
-            <input type="text" id="name" required />
-        </div>
-
-        <div class="form-group">
-            <label id="phoneLabel">Telefon raqamingiz</label>
-            <input type="tel" id="phone" required />
-        </div>
-
-        <div class="form-group">
-            <label id="peopleLabel">Necha kishi sayohatga ketadi?</label>
-            <input type="number" id="people" required min="1" />
-        </div>
-
-        <button onclick="submitForm()">Yuborish</button>
-
-        <div class="message" id="message"></div>
+  <div class="container">
+    <div class="lang-select">
+      <select id="lang" onchange="changeLang()">
+        <option value="uz">🇺🇿 O‘zbekcha</option>
+        <option value="ru">🇷🇺 Русский</option>
+      </select>
     </div>
 
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbyaIPLLfq948c8yploURqTAFHOiMMvyYddUmB7M7BcaBQvqggb4RLgc_9EGk1jq3FhH/exec"; // bu joyga o'z Apps Script URL'ingni joylashtir
+    <h2 id="formTitle">Sayohat uchun ariza</h2>
 
-        const translations = {
-            uz: {
-                formTitle: "Sayohat uchun ariza",
-                nameLabel: "Ismingiz",
-                phoneLabel: "Telefon raqamingiz",
-                peopleLabel: "Necha kishi sayohatga ketadi?",
-                button: "Yuborish",
-                success: "Rahmat! Ma’lumot yuborildi ✅",
-                error: "Xatolik yuz berdi ❌"
-            },
-            ru: {
-                formTitle: "Заявка на путешествие",
-                nameLabel: "Ваше имя",
-                phoneLabel: "Ваш номер телефона",
-                peopleLabel: "Сколько человек едет?",
-                button: "Отправить",
-                success: "Спасибо! Данные отправлены ✅",
-                error: "Ошибка при отправке ❌"
-            }
-        };
+    <div class="form-group">
+      <label id="nameLabel">Ismingiz</label>
+      <input type="text" id="name" required />
+    </div>
 
-        function changeLang() {
-            const lang = document.getElementById("lang").value;
-            document.getElementById("formTitle").textContent = translations[lang].formTitle;
-            document.getElementById("nameLabel").textContent = translations[lang].nameLabel;
-            document.getElementById("phoneLabel").textContent = translations[lang].phoneLabel;
-            document.getElementById("peopleLabel").textContent = translations[lang].peopleLabel;
-            document.querySelector("button").textContent = translations[lang].button;
-        }
+    <div class="form-group">
+      <label id="phoneLabel">Telefon raqamingiz</label>
+      <input type="tel" id="phone" required />
+    </div>
 
-        async function submitForm() {
-            const lang = document.getElementById("lang").value;
-            const message = document.getElementById("message");
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const people = document.getElementById("people").value.trim();
+    <div class="form-group">
+      <label id="peopleLabel">Necha kishi sayohatga ketadi?</label>
+      <input type="number" id="people" required min="1" />
+    </div>
 
-            if (!name || !phone || !people) {
-                message.style.color = "red";
-                message.textContent = lang === "uz" ? "Iltimos, barcha maydonlarni to‘ldiring!" : "Пожалуйста, заполните все поля!";
-                return;
-            }
+    <button onclick="submitForm()">Yuborish</button>
 
-            try {
-                const res = await fetch(scriptURL, {
-                    method: "POST",
-                    body: JSON.stringify({ name, phone, people }),
-                    headers: { "Content-Type": "application/json" },
-                });
+    <div class="message" id="message"></div>
+  </div>
 
-                if (res.ok) {
-                    message.style.color = "green";
-                    message.textContent = translations[lang].success;
-                    document.getElementById("name").value = "";
-                    document.getElementById("phone").value = "";
-                    document.getElementById("people").value = "";
-                } else {
-                    throw new Error("Request failed");
-                }
-            } catch (e) {
-                message.style.color = "red";
-                message.textContent = translations[lang].error;
-            }
-        }
-    </script>
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyaIPLLfq948c8yploURqTAFHOiMMvyYddUmB7M7BcaBQvqggb4RLgc_9EGk1jq3FhH/exec"; // bu joyga o'z Apps Script URL'ingni joylashtir
+
+    const translations = {
+      uz: {
+        formTitle: "Sayohat uchun ariza",
+        nameLabel: "Ismingiz",
+        phoneLabel: "Telefon raqamingiz",
+        peopleLabel: "Necha kishi sayohatga ketadi?",
+        button: "Yuborish",
+        success: "Rahmat! Ma’lumot yuborildi ✅",
+        error: "Xatolik yuz berdi ❌"
+      },
+      ru: {
+        formTitle: "Заявка на путешествие",
+        nameLabel: "Ваше имя",
+        phoneLabel: "Ваш номер телефона",
+        peopleLabel: "Сколько человек едет?",
+        button: "Отправить",
+        success: "Спасибо! Данные отправлены ✅",
+        error: "Ошибка при отправке ❌"
+      }
+    };
+
+    function changeLang() {
+      const lang = document.getElementById("lang").value;
+      document.getElementById("formTitle").textContent = translations[lang].formTitle;
+      document.getElementById("nameLabel").textContent = translations[lang].nameLabel;
+      document.getElementById("phoneLabel").textContent = translations[lang].phoneLabel;
+      document.getElementById("peopleLabel").textContent = translations[lang].peopleLabel;
+      document.querySelector("button").textContent = translations[lang].button;
+    }
+
+    async function submitForm() {
+      const lang = document.getElementById("lang").value;
+      const message = document.getElementById("message");
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const people = document.getElementById("people").value.trim();
+
+      if (!name || !phone || !people) {
+        message.style.color = "red";
+        message.textContent = lang === "uz" ? "Iltimos, barcha maydonlarni to‘ldiring!" : "Пожалуйста, заполните все поля!";
+        return;
+      }
+
+      message.style.color = "#0a192f";
+      message.textContent = lang === "uz" ? "Yuborilmoqda..." : "Отправляется...";
+
+      try {
+        const res = await fetch(scriptURL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, phone, people }),
+        });
+
+        message.style.color = "green";
+        message.textContent = translations[lang].success;
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("people").value = "";
+      } catch (e) {
+        message.style.color = "red";
+        message.textContent = translations[lang].error;
+      }
+    }
+  </script>
 </body>
-
 </html>
